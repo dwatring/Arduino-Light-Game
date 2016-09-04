@@ -3,7 +3,7 @@ int switchState = 0;
 int currentLevel = 1;
 int x = 0;
 int timer = 0;
-int maxLight = 7;
+int maxLight = 9;
 
 void setup() {
   // put your setup code here, to run once:
@@ -13,11 +13,13 @@ void setup() {
   pinMode(5, OUTPUT);
   pinMode(6, OUTPUT);
   pinMode(7, OUTPUT);
+  pinMode(8, OUTPUT);
+  pinMode(9, OUTPUT);
 }
 
 void loop() {
   //INITIALIZE LOOP
-  delay(250);
+  delay(250 / currentLevel);
   int currentLight = currentLevel + 3;
   for(int i = 3; i < currentLight; i++){
     digitalWrite(i, HIGH);
@@ -39,10 +41,10 @@ void loop() {
       break;
     }
     timer++;
-    delay(10);
+    delay(10 / (currentLevel * 0.8));
   }while(timer <= 50);
   timer = 0;
-  delay(250);
+  delay(250 / currentLevel);
   //BEGIN LIGHT LOOP
   digitalWrite(currentLight, HIGH);
   do{
@@ -66,7 +68,7 @@ void loop() {
       break;
     }
     timer++;
-    delay(5);
+    delay(5 / (currentLevel * 0.8));
   }while(timer <= 50);
   timer = 0;
 }
