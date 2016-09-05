@@ -1,12 +1,11 @@
-
-int switchState = 0;
-int currentLevel = 1;
-int x = 0;
+int switchState = 0; //variable for the button press check
+int currentLevel = 1; //current "level" of the game that begins at one
+int maxLight = 9; //the max pin that is being used
+int minLight = 3; //the minimum pin that is used. The levels progress from minLight to maxLight sequentially
 int timer = 0;
-int maxLight = 9;
 
 void setup() {
-  // put your setup code here, to run once:
+  //PIN INITIATION
   pinMode(2, INPUT);
   pinMode(3, OUTPUT);
   pinMode(4, OUTPUT);
@@ -18,10 +17,11 @@ void setup() {
 }
 
 void loop() {
+  
   //INITIALIZE LOOP
   delay(250 / currentLevel);
   int currentLight = currentLevel + 3;
-  for(int i = 3; i < currentLight; i++){
+  for(int i = minLight; i < currentLight; i++){
     digitalWrite(i, HIGH);
   }
   
@@ -44,7 +44,10 @@ void loop() {
     delay(10 / (currentLevel * 0.8));
   }while(timer <= 50);
   timer = 0;
+  //END NO LIGHT LOOP
+  
   delay(250 / currentLevel);
+  
   //BEGIN LIGHT LOOP
   digitalWrite(currentLight, HIGH);
   do{
@@ -71,4 +74,5 @@ void loop() {
     delay(5 / (currentLevel * 0.8));
   }while(timer <= 50);
   timer = 0;
+  //END LIGHT LOOP
 }
